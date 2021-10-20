@@ -13,7 +13,7 @@ body {
 	margin: 0 auto;
 }
 
-.login-form {
+.login-form,.regist-form {
 	width: 300px;
 	background: #EEEFF1;
 	 text-align: center;
