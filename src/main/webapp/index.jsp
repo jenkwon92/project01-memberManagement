@@ -44,7 +44,6 @@
 		<div class="links">
 			<a href="#">회원정보수정</a>
 		</div>
-		
 	</div>
 </body>
 </html>
