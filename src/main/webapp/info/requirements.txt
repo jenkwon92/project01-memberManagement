@@ -1,0 +1,97 @@
+회원관리 시스템 구축(분석,설계,구현)
+- 요구분석 : UML 의 Use Case Diagram 
+- 설계 : UML의 Class Diagram , ERD  
+		  UI 설계 
+- 구현 : Use Case 별 업무분담 
+		  Use Case 별 구현 순서 :  아이디로 회원조회 -> 로그인 , 로그아웃 -> 주소로 회원리스트조회 -> 회원정보수정 -> 회원가입(아이디 중복확인) 
+   
+   File List :  Model - MemberVO , MemberDAO 
+   				View - css/home.css , index.jsp
+   				 ( 비로그인시 : 아이디로 회원조회폼 , 로그인폼 , 회원가입링크    
+   				 로그인시: 아이디로 회원조회폼 , 주소로 회원리스트조회폼, 누구님(로그인폼을 대체),로그아웃링크,회원정보수정링크)
+   				 
+   				 아이디로 회원조회 - findbyid-ok.jsp , findbyid-fail.jsp( alert ) 
+   				 로그인 - login-fail.jsp 에서 alert 후 index.jsp로 이동 ,  로그인 성공시에는 바로 index.jsp 
+   				 로그아웃 - index.jsp에서 로그인 상태시에 링크 제공 , 로그아웃 성공되면 다시 index.jsp로 이동
+   				 주소로 회원리스트조회 - index.jsp , 조회결과 - findbyaddress-result.jsp( table 형식으로 회원아이디, 회원명을 제공 ) 
+   				 회원정보수정 - update-form.jsp ( 수정폼 제공 ) , update-result.jsp ( 수정 결과 화면 ) 
+   				 회원가입 -  register-form.jsp (회원가입폼 제공 ) , register-result.jsp ( 가입결과 화면 ) , idcheck-ok.jsp( 팝업 ) , idcheck-fail.jsp( 팝업 )  
+   				 
+   				  
+   				Controller - FindMemberByIdServlet , LoginServlet, LogoutServlet , FindMemberListByAddressServlet , UpdateMemberServlet 	
+   							   RegisterMemberServlet , IdCheckServlet 	  
+		  
+아이디로 회원검색 
+
+index.jsp --- FindMemberByIdServlet --- MemberDAO		---------------  Database 
+					|							  findMemberById(id): MemberVO 	
+					| forward		
+					|
+					findbyid-ok.jsp or findbyid-fail.jsp					
+					
+					
+로그인 , 로그아웃 
+1) 로그인 
+index.jsp --- LoginServlet --- MemberDAO  ----------------- Database 					
+					|				 login(id,password) : MemberVO
+					| redirect
+					|		
+				 로그인 실패할 경우 login-fail.jsp 에서 로그인 실패 alert 후 index.jsp로 이동 
+				 로그인 성공할 경우 index.jsp로 이동 , 로그인 폼 대신 누구님 메세지와 아래 라인에 로그아웃 링크를 보여준다
+2) 로그아웃 
+index.jsp ---- LogoutServlet
+					|
+					|로그아웃 처리 후 
+					| redirect 
+					| 
+					index.jsp로 이동 ( 누구님 메세지와 로그아웃 링크 대신 로그인폼을 제공한다 ) 
+
+3) 주소로 회원조회 
+
+index.jsp ------ FindMemberListByAddressServlet ------------ MemberDAO ----------------------  Database 
+								|
+								| request 객체에 리스트를 할당 			findMemberListByAddress(address) : ArrayList<MemberVO>
+								| forward 		
+								|								
+					    findbyaddress-result.jsp
+
+4) 회원정보수정 
+index.jsp ---- update-form.jsp ------ UpdateMemberServlet -------  MemberDAO 
+																					  update(MemberVO) 
+												doPost() 
+												MemberDAO를 이용해 DB에 회원정보를 수정 
+												세션에 저장된 회원정보를 업데이트 
+												|
+												| redirect 
+												update-result.jsp 
+												Home
+												회원정보 수정완료
+
+												아이디: java
+												이름: 어이유
+												주소: 오리
+
+					<input type="text" name="id" readonly="readonly" value="세션에 저장된 회원아이디">
+					<%-- readonly는 수정불가,읽기전용  --%>
+
+5) 회원가입 
+	
+	index.jsp --- register-form.jsp 	-------------- RegisterMemberServlet ---- MemberDAO				-- DB
+					비밀번호와 																	register(MemberVO)
+					비밀번호 확인란을 입력하게 해					doPost()
+					일치할 때 가입하게 한다 						|
+																	| redirect
+																	|
+																    register-result.jsp
+																    ( 회원가입을 축하합니다 ) 	
+
+
+6) 아이디 중복확인 
+index.jsp -- register-form.jsp --중복확인버튼누르면--  IdCheckServlet ---  MemberDAO 													---- DB 
+																						idcheck(id) : boolean ( 존재하면 true , 존재하지 않으면 false )  		
+																	|
+																	| forward 
+																	|
+																	|
+				 												   false 사용가능일 때는 idcheck-ok.jsp 에서 팝업으로 응답 
+				 												   true 사용불가일 때는 idcheck-fail.jsp에서 팝업으로 응답 
