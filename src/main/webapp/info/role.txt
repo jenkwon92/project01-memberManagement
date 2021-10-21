@@ -4,7 +4,7 @@ feat /front-end : html,css 관련 업무
 진아 - 2, 5
 유라 - 3,4
 
-1.  feat/findbyid
+1.  feat/findMemberById
 비로그인 상태에서 회원아이디로 회원정보를 검색할 수 있다 ( 이름 , 주소 ) 
  아이디로 회원조회 - findbyid-ok.jsp , findbyid-fail.jsp( alert ) 
 
@@ -16,13 +16,13 @@ feat /front-end : html,css 관련 업무
 회원가입이 되도록 한다 
 선택적으로 고객이 원할 경우 프로필 사진 업로드가 가능하도록 한다 
 
-3  feat/loginout
+3  feat/logInOut
 회원일 경우에는 로그인 , 로그아웃 기능을 사용할 수 있다 
 로그인 - login-fail.jsp 에서 alert 후 index.jsp로 이동 ,  로그인 성공시에는 바로 index.jsp 
 로그아웃 - index.jsp에서 로그인 상태시에 링크 제공 , 로그아웃 성공되면 다시 index.jsp로 이동
 
 
-4. feat/findmemberlist
+4. feat/findMemberList
 회원은 주소로 회원 정보를 검색할 수 있다 
 주소로 회원리스트조회 - index.jsp , 조회결과 - findbyaddress-result.jsp( table 형식으로 회원아이디, 회원명을 제공 ) 
 
