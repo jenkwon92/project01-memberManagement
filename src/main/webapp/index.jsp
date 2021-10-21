@@ -11,8 +11,8 @@
 <body>
 	<div class="login-form">
 		<%-- 아이디로 회원검색 --%>
-		<form>
-			<input type="text" class="text-field" placeholder="아이디" required="required">
+		<form action="FindMemberByIdServlet">
+			<input type="text" name="memberId" class="text-field" placeholder="아이디" required="required">
 			<button type="submit" class="submit-btn">검색</button>
 		</form>
 		<p style="font-size: 14px; color : #9b9b9b">OR</p><br>
