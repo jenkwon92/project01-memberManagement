@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+	border-radius: 5px;
+	border: none;
+	font-size: 14px;
+	color:#808080;
+	
+}
+
+body {
+	margin: 0 auto;
+}
+
+.topnav {
+  background-color: #EEEFF1;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #1BBC9B;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #1BBC9B;
+  color: white;
+}
+
+.table-form{
+	width: 300px;
+	background: #EEEFF1;
+	 text-align: center;
+	margin-left: auto;
+	margin-right : auto;
+	margin-top: 50px;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+table{
+	margin-left: auto;
+	margin-right : auto;
+}
+table,td,th{
+	border-collapse: collapse; 
+	border: 1px solid #EEEFF1;
+}
+th{
+	color: white;
+	padding: 15px;
+	background-color: #1BBC9B;
+}
+
+td{
+	padding: 15px;
+	background-color: white;
+}
+
+a{
+	text-decoration: none;
+	color: #1BBC9B;
+}
+a:hover {
+	text-decoration: none;
+	color: white;
+}
