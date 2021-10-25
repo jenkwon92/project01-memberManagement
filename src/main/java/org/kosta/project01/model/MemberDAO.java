@@ -48,6 +48,59 @@ public class MemberDAO {
 		}
 		return vo;
 	}
+	public void register(MemberVO vo) throws SQLException {
+	     Connection con=null;
+	      PreparedStatement pstmt=null;
+	      try {
+	         con=DriverManager.getConnection(url, username, userpass);
+	         String sql="insert into member (id,password,name,address) values(?,?,?,?)";
+	         pstmt=con.prepareStatement(sql);
+			 pstmt.setString(1, vo.getId());
+			 pstmt.setString(2, vo.getPassword());
+			 pstmt.setString(3, vo.getName());
+			 pstmt.setString(4, vo.getAddress());
+			 pstmt.executeUpdate();
+	      }finally {
+	         closeAll(pstmt, con);
+	      }
+	}//register() end
+	public boolean idCheck(String id) throws SQLException {
+		boolean flag = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DriverManager.getConnection(url,username, userpass);
+			String sql = "select count(*) from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1)==1) {
+					flag = true;
+				}
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return flag;
+	}//idCheck() end
+	public void updateMember(MemberVO vo) throws SQLException {
+		Connection con= null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DriverManager.getConnection(url,username,userpass);
+			String sql = "UPDATE member SET name=? ,password=? , address=? WHERE id=?";
+			pstmt= con.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getPassword());
+			pstmt.setString(3, vo.getAddress());
+			pstmt.setString(4, vo.getId());
+			pstmt.executeUpdate();
+		}finally {
+			closeAll(pstmt, con);
+		}
+	}//updateMember() end
 	
 }
 
