@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
  * Singleton Design Pattern을 적용 : 시스템 상에서 단 한번 객체 생성해 공유하여 사용하고자 할 때 적용하는 설계 패턴 
@@ -18,17 +19,20 @@ public class MemberDAO {
 	public static MemberDAO getInstance() {
 		return instance;
 	}
+  
 	public void closeAll(PreparedStatement pstmt,Connection con) throws SQLException {
 		if(pstmt!=null)
 			pstmt.close();
 		if(con!=null)
 			con.close();
 	}
+  
 	public void closeAll(ResultSet rs,PreparedStatement pstmt,Connection con) throws SQLException {
 		if(rs!=null)
 			rs.close();
 		closeAll(pstmt, con);
 	}
+  
 	public MemberVO findMemberById(String id) throws SQLException {
 		MemberVO vo = null;
 		Connection con = null;
@@ -47,8 +51,9 @@ public class MemberDAO {
 			closeAll(rs, pstmt, con);
 		}
 		return vo;
-	}
-	public void register(MemberVO vo) throws SQLException {
+	}//findMemberById() end
+  
+public void register(MemberVO vo) throws SQLException {
 	     Connection con=null;
 	      PreparedStatement pstmt=null;
 	      try {
@@ -64,7 +69,8 @@ public class MemberDAO {
 	         closeAll(pstmt, con);
 	      }
 	}//register() end
-	public boolean idCheck(String id) throws SQLException {
+  
+  public boolean idCheck(String id) throws SQLException {
 		boolean flag = false;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -83,8 +89,25 @@ public class MemberDAO {
 		}finally {
 			closeAll(rs, pstmt, con);
 		}
-		return flag;
+    return flag;
 	}//idCheck() end
+  
+	public ArrayList<MemberVO> findMemberListByAddress(String address) throws SQLException{
+		ArrayList<MemberVO> list=new ArrayList<MemberVO>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DriverManager.getConnection(url, username, userpass);
+			String sql="select id,name from member where address=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, address);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new MemberVO(rs.getString(1),null,rs.getString(2),null));
+		return list;
+	}//findMemberListByAddress() end
+		
 	public void updateMember(MemberVO vo) throws SQLException {
 		Connection con= null;
 		PreparedStatement pstmt = null;
@@ -101,7 +124,6 @@ public class MemberDAO {
 			closeAll(pstmt, con);
 		}
 	}//updateMember() end
-	
 }
 
 
