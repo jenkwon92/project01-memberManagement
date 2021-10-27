@@ -36,8 +36,8 @@
 		<br>
 		
 		<%-- 주소로 회원정보 조회 --%>
-		<form action="">
-			<input type="text" class="text-field" placeholder="주소" required="required" >
+		<form action="FindMemberListByAddressServlet">
+			<input type="text" name="address" class="text-field" placeholder="주소" required="required" >
 			<button type="submit" class="submit-btn">조회</button>
 		</form>		
 		<%-- 회원 정보 수정 링크 --%>

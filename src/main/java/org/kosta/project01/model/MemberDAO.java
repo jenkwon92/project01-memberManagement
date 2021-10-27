@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /*
  * Singleton Design Pattern을 적용 : 시스템 상에서 단 한번 객체 생성해 공유하여 사용하고자 할 때 적용하는 설계 패턴 
@@ -48,7 +49,25 @@ public class MemberDAO {
 		}
 		return vo;
 	}
-	
+	public ArrayList<MemberVO> findMemberListByAddress(String address) throws SQLException{
+		ArrayList<MemberVO> list=new ArrayList<MemberVO>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DriverManager.getConnection(url, username, userpass);
+			String sql="select id,name from member where address=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, address);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(new MemberVO(rs.getString(1),null,rs.getString(2),null));
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
 }
 
 

@@ -21,3 +21,11 @@ select count(*) from member where id='java'
 select password,name,address from member where id=?
 
 select name,address from member where id=? and password=?;
+
+-- 회원등록
+INSERT INTO member(id,password,name,address) VALUES('java','a','아이유','오리');
+INSERT INTO member(id,password,name,address) VALUES('spring','s','서정우','용인');
+
+
+
+
