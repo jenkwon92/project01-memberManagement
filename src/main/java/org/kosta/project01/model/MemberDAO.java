@@ -105,6 +105,9 @@ public void register(MemberVO vo) throws SQLException {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				list.add(new MemberVO(rs.getString(1),null,rs.getString(2),null));
+        finally {
+			closeAll(rs, pstmt, con);
+		}
 		return list;
 	}//findMemberListByAddress() end
 		
@@ -123,6 +126,26 @@ public void register(MemberVO vo) throws SQLException {
 		}finally {
 			closeAll(pstmt, con);
 		}
+  } //updateMember() end
+
+	public MemberVO login(String id,String password) throws SQLException {
+		MemberVO vo=null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DriverManager.getConnection(url, username, userpass);
+			String sql="select name,address from member where id=? and password=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				vo=new MemberVO(id,password,rs.getString(1),rs.getString(2));
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return vo;
 	}//updateMember() end
 }
 
