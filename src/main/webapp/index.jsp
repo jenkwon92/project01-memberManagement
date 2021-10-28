@@ -7,9 +7,14 @@
 <meta charset="UTF-8">
 <title>HOME</title>
 <link rel="stylesheet" type="text/css" href="css/home.css">
+<link rel="stylesheet" type="text/css" href="css/topnav.css">
  <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
 </head>
 <body>
+<div class="topnav">
+		<a class="active" href="index.jsp">Home</a>
+	</div>
+	<div>
 	<div class="login-form">
 		<%-- 아이디로 회원검색 --%>
 		<form action="FindMemberByIdServlet">
@@ -57,6 +62,7 @@
 			<a href="update-form.jsp">회원정보수정</a>
 		</div>
 		<% } %>
+	</div>
 	</div>
 </body>
 </html>

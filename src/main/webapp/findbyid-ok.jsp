@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>회원찾기 성공</title>
 <link rel="stylesheet" type="text/css" href="css/table.css">
+<link rel="stylesheet" type="text/css" href="css/topnav.css">
 <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css"
 	rel="stylesheet">
 

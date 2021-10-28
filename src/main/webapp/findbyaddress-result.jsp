@@ -7,7 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>findbyaddress-result</title>
-<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/table.css">
+<link rel="stylesheet" type="text/css" href="css/topnav.css">
+<link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css"
+	rel="stylesheet">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -20,13 +24,16 @@
 </head>
 <body>
 	<%
-		@SuppressWarnings("unchecked")
-		ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list");
-			%>
-	<div class="container">
-		<br> <a href="index.jsp">Home</a><br> <br>
-		<h3><%=request.getParameter("address")%>에 사는 회원리스트
-		</h3>
+	@SuppressWarnings("unchecked")
+	ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list");
+	%>
+	<div class="topnav">
+		<a class="active" href="index.jsp">Home</a>
+	</div>
+	<!-- <div class="container"> -->
+	<div class="table-form">
+		<p><%=request.getParameter("address")%>에 사는 회원리스트
+		</p>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
