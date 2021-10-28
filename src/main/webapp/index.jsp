@@ -51,10 +51,10 @@
 		<form action="FindMemberListByAddressServlet">
 			<input type="text" name="address" class="text-field" placeholder="주소" required="required" >
 			<button type="submit" class="submit-btn">조회</button>
-		</form>		
+		</form>		 
 		<%-- 회원 정보 수정 링크 --%>
 		<div class="links">
-			<a href="UpdateMemberServlet">회원정보수정</a>
+			<a href="update-form.jsp">회원정보수정</a>
 		</div>
 		<% } %>
 	</div>

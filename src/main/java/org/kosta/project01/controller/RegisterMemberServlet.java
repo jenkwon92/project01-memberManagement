@@ -24,7 +24,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		String confitmPassword = request.getParameter("confirmPassword");
+		String confirmPassword = request.getParameter("confirmPassword");
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		MemberVO vo = new MemberVO(id, password, name, address);
