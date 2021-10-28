@@ -28,11 +28,13 @@
 			<button type="submit"  class="submit-btn">로그인</button>
 		</form>
 		<div class="links">
-			<a href="#">회원가입</a>
+
+			<a href="regist-form.jsp">회원가입</a>
+    </div>
 			<%
 		} else {
 			%>
-		</div>
+			
 		<%-- 로그인 상태일때는 누구님 반갑습니다 , 로그아웃 링크를 제공한다 --%>
 		<p style="font-size: 14px; color : #9b9b9b"> <%=mvo.getName() %>님 반갑습니다</p>
 		<script type="text/javascript">
@@ -52,7 +54,7 @@
 		</form>		
 		<%-- 회원 정보 수정 링크 --%>
 		<div class="links">
-			<a href="#">회원정보수정</a>
+			<a href="UpdateMemberServlet">회원정보수정</a>
 		</div>
 		<% } %>
 	</div>
