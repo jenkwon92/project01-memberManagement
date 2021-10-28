@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 * {
 	box-sizing: border-box;
 	font-family: 'Noto Sans KR', sans-serif;
@@ -9,12 +8,11 @@
 }
 
 body {
-	width: 300px;
 	margin: 0 auto;
 }
 
 .login-form,.regist-form {
-	width: 300px;
+	width :300px;
 	background: #EEEFF1;
 	 text-align: center;
 	margin-left: auto;
@@ -54,4 +52,3 @@ body {
 	font-size: 14px;
 	color : #9b9b9b;
 }
-
